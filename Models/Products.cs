@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fanap.Plus.Product_Management.Models
 {
-    public class Product
+    public class Products
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,7 +17,7 @@ namespace Fanap.Plus.Product_Management.Models
         public string ProjectManagementName { get; set; }
         public string ProductOwnerName { get; set; }
 
-       // public string[] DevelopmentTeam { get; set; }
+        // public string[] DevelopmentTeam { get; set; }
         //public string[] OtherMembers { get; set; }
     }
 }
