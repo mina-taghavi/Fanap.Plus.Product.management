@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Fanap.Plus.Product_Management.Models;
-using Fanap.Plus.Product_Management.Data;
+
 
 namespace Fanap.Plus.Product_Management
 {
@@ -37,8 +37,6 @@ namespace Fanap.Plus.Product_Management
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<DataContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DataContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

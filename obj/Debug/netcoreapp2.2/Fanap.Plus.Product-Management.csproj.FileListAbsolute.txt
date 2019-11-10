@@ -27,15 +27,4 @@ D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plu
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.dll
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.pdb
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.csproj.CopyComplete
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Index.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Welcome.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Create11.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Create.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Delete.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Details.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Product\Edit.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Products\Create.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Products\Delete.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Products\Details.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Products\Edit.g.cshtml.cs
-D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Razor\Views\Products\Index.g.cshtml.cs
+D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.csprojAssemblyReference.cache
