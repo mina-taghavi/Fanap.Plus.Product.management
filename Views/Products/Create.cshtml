@@ -1,4 +1,7 @@
-﻿@model Fanap.Plus.Product_Management.Models.Products
+﻿@using Microsoft.AspNetCore.Authentication.OpenIdConnect
+@using Microsoft.EntityFrameworkCore
+
+@model Fanap.Plus.Product_Management.Models.Products
 
 @{
     ViewData["Title"] = "Create";
@@ -37,10 +40,26 @@
                 <input asp-for="ProductOwnerName" class="form-control" />
                 <span asp-validation-for="ProductOwnerName" class="text-danger"></span>
             </div>
+            
+            @*<div class="form-group">
+                @Html.LabelFor(x => Model.Team, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.DropDownListFor(x => Model.Team, new SelectList(Model.Teams, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country"})
+                    @Html.ValidationMessageFor(x => x.Team, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            
+            
+            
+            
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
+
     </div>
 </div>
 
