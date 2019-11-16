@@ -13,8 +13,11 @@ namespace Fanap.Plus.Product_Management.Models
 
         public int Id { get; set; }
         public string Name { set; get; }
-        
-        }
+        public ICollection<TeamAssignment> TeamAssignments { get; set; }
+
+
+
+    }
 
 
 

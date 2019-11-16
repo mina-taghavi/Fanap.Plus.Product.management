@@ -42,3 +42,4 @@ D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plu
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.dll
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.pdb
 D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.csproj.CopyComplete
+D:\Practice Zone\Fanap.Plus.Product-Management\obj\Debug\netcoreapp2.2\Fanap.Plus.Product-Management.csprojAssemblyReference.cache
