@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fanap.Plus.Product_Management.Models
 {
@@ -17,8 +18,8 @@ namespace Fanap.Plus.Product_Management.Models
         [Display(Name = "نام مدیر پروژه")] public string ProjectManagementName { get; set; }
 
         public string ProductOwnerName { get; set; }
-        public ICollection<TeamAssignment> TeamAssignments { get; set; } 
-
+        public ICollection<TeamAssignment> TeamAssignments { get; set; }
+        
 
 
         //[NotMapped] public IEnumerable<Teams> Teams { get; set; }
