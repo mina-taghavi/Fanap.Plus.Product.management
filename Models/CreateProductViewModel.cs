@@ -17,5 +17,6 @@ namespace Fanap.Plus.Product_Management.Models
 
         public string ProductOwnerName { get; set; }
         public ICollection<Teams> Teams { get; set; } = new List<Teams>();
+        public int[] TeamIds { get; set; }
     }
 }

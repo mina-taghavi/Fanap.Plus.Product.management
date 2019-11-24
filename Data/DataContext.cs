@@ -19,5 +19,16 @@ namespace Fanap.Plus.Product_Management.Models
         public DbSet<Fanap.Plus.Product_Management.Models.Teams> Teams { get; set; }
 
         public DbSet<Fanap.Plus.Product_Management.Models.Members> Members { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TeamAssignment>()
+                .HasKey(a => new { a.TeamId, a.ProductId});
+
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
+
+
 }

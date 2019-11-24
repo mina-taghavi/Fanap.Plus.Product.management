@@ -7,7 +7,6 @@ namespace Fanap.Plus.Product_Management.Models
 {
     public class TeamAssignment
     {
-        public int Id { get; set; }
         public int TeamId { get; set; }
         public int ProductId { get; set; }
         public Teams Team { get; set; }

@@ -51,7 +51,7 @@
                 <div class="col-md-5">
                     
                     @*@Html.DropDownList(x => Model.Teams, new SelectList(Model.Teams, "Id", "Name"), htmlAttributes: new { @class = "form-control" })*@
-                    @Html.DropDownListFor(x => Model.Teams, new SelectList(Model.Teams, "Id", "Name"))
+                    @Html.ListBoxFor(x => Model.TeamIds, new SelectList(Model.Teams, "Id", "Name"))
                     
                 </div>
             </div>

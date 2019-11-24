@@ -66,12 +66,12 @@ namespace Fanap.Plus.Product_Management.Controllers
                 ProjectManagementName = viewModel.ProjectManagementName,
             };
             product.TeamAssignments = new List<TeamAssignment>();
-            foreach (var team in viewModel.Teams)
+            foreach (var team in viewModel.TeamIds)
             {
                 product.TeamAssignments.Add(new TeamAssignment()
                 {
-                    Product = product,
-                    Team = team
+                    ProductId = product.Id,
+                    TeamId = team
                 });
             }
             if (ModelState.IsValid)
