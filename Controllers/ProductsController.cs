@@ -45,7 +45,9 @@ namespace Fanap.Plus.Product_Management.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            return View();
+            var createViewModel = new CreateProductViewModel();
+            createViewModel.Teams = _context.Teams.ToList();
+            return View(createViewModel);
         }
 
         // POST: Products/Create
@@ -53,15 +55,32 @@ namespace Fanap.Plus.Product_Management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CreationDate,Description,ProjectManagementName,ProductOwnerName")] Products products)
+        public async Task<IActionResult> Create(CreateProductViewModel viewModel)
         {
+            var product = new Products()
+            {
+                Name = viewModel.Name,
+                CreationDate = viewModel.CreationDate,
+                Description = viewModel.Description,
+                ProductOwnerName = viewModel.ProductOwnerName,
+                ProjectManagementName = viewModel.ProjectManagementName,
+            };
+            product.TeamAssignments = new List<TeamAssignment>();
+            foreach (var team in viewModel.Teams)
+            {
+                product.TeamAssignments.Add(new TeamAssignment()
+                {
+                    Product = product,
+                    Team = team
+                });
+            }
             if (ModelState.IsValid)
             {
-                _context.Add(products);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(products);
+            return View(product);
         }
 
         // GET: Products/Edit/5
