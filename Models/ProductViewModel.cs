@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Fanap.Plus.Product_Management.Models
 {
-    public class CreateProductViewModel
+    public class ProductViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,10 +13,15 @@ namespace Fanap.Plus.Product_Management.Models
 
         public string Description { get; set; }
 
-        [Display(Name = "نام مدیر پروژه")] public string ProjectManagementName { get; set; }
+       // [Display(Name = "نام مدیر پروژه")]
+       public string ProjectManagementName { get; set; }
 
         public string ProductOwnerName { get; set; }
         public ICollection<Teams> Teams { get; set; } = new List<Teams>();
         public int[] TeamIds { get; set; }
+        public int[] MemberIds { get; set; } = new[] {1};
+        public ICollection<Members> Members { get; set; } = new List<Members>();
+
     }
+    
 }

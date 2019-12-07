@@ -3,7 +3,7 @@
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
 
-@model Fanap.Plus.Product_Management.Models.CreateProductViewModel
+@model Fanap.Plus.Product_Management.Models.ProductViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,6 +13,7 @@
 
 <h4>Products</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -42,25 +43,44 @@
                 <input asp-for="ProductOwnerName" class="form-control" />
                 <span asp-validation-for="ProductOwnerName" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Teams" class="control-label"></label>
 
+                @Html.ListBoxFor(Model => Model.TeamIds, new MultiSelectList(Model.Teams, "Id", "Name"),
+                    new { id = "MultipleDropDown", multiple = "multiple" })
+                @section Scripts{
+                    <script>
+                        $(function () {
+                            $("#MultipleDropDown").chosen({
+                                //disable_search_threshold: 9
+                                                    width: "100%"
+                            });
+                           
+                        });
+                    </script>
+                }
 
-                
-                <div class="col-md-5">
-                    
-                    @*@Html.DropDownList(x => Model.Teams, new SelectList(Model.Teams, "Id", "Name"), htmlAttributes: new { @class = "form-control" })*@
-                    @Html.ListBoxFor(x => Model.TeamIds, new SelectList(Model.Teams, "Id", "Name"))
-                    
-                </div>
+
             </div>
+            <div class="form-group">
+                <label asp-for="Members" class="control-label"></label>
 
+                @Html.ListBoxFor(Model => Model.MemberIds, new MultiSelectList(Model.Members, "Id", "FirstName"),
 
-
-
-
-
+                    new { id = "NormalDropDown"})
+                @section Scripts{
+                    <script>
+                        $(function () {
+                            $("#NormalDropDown").chosen({
+                                disable_search_threshold: 9
+                                                        });
+                           
+                        });
+                    </script>
+                }
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

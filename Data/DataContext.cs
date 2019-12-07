@@ -14,9 +14,10 @@ namespace Fanap.Plus.Product_Management.Models
         {
         }
 
-        public DbSet<Fanap.Plus.Product_Management.Models.Products> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
 
-        public DbSet<Fanap.Plus.Product_Management.Models.Teams> Teams { get; set; }
+        public DbSet<Teams> Teams { get; set; }
+        public DbSet<TeamAssignment> TeamAssignment { get; set; }
 
         public DbSet<Fanap.Plus.Product_Management.Models.Members> Members { get; set; }
 

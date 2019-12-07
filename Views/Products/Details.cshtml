@@ -1,4 +1,4 @@
-﻿@model Fanap.Plus.Product_Management.Models.Products
+﻿@model Fanap.Plus.Product_Management.Models.ProductViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,36 +10,48 @@
     <h4>Products</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreationDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreationDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProjectManagementName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProjectManagementName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProductOwnerName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProductOwnerName)
         </dd>
+        <dt class="col-sm-2">
+            
+            @Html.DisplayNameFor(model => model.Teams)
+
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.Teams)
+            {
+                <div>@item.Name</div>
+            }
+        </dd>
+        <
     </dl>
 </div>
 <div>

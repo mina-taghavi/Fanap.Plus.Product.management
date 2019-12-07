@@ -15,7 +15,8 @@ namespace Fanap.Plus.Product_Management.Models
 
         public string Description { get; set; }
 
-        [Display(Name = "نام مدیر پروژه")] public string ProjectManagementName { get; set; }
+        //[Display(Name = "نام مدیر پروژه")] 
+        public string ProjectManagementName { get; set; }
 
         public string ProductOwnerName { get; set; }
         public ICollection<TeamAssignment> TeamAssignments { get; set; }

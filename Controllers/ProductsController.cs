@@ -12,10 +12,11 @@ namespace Fanap.Plus.Product_Management.Controllers
     public class ProductsController : Controller
     {
         private readonly DataContext _context;
-
-        public ProductsController(DataContext context)
+        private ITeamDao TeamDao { get; set; }
+        public ProductsController(DataContext context, ITeamDao teamDao)
         {
             _context = context;
+            TeamDao = teamDao;
         }
 
         // GET: Products
@@ -38,15 +39,25 @@ namespace Fanap.Plus.Product_Management.Controllers
             {
                 return NotFound();
             }
-
-            return View(products);
+            ProductViewModel detailViewModel;
+            detailViewModel = new ProductViewModel();
+            detailViewModel.Teams = TeamDao.Find(id.Value);
+            detailViewModel.CreationDate =products.CreationDate;
+            detailViewModel.Description=products.Description;
+            detailViewModel.Id=products.Id;
+            detailViewModel.Name=products.Name;
+            detailViewModel.ProductOwnerName=products.ProductOwnerName;
+            detailViewModel.ProjectManagementName=products.ProjectManagementName;
+            
+            return View(detailViewModel);
         }
 
         // GET: Products/Create
         public IActionResult Create()
         {
-            var createViewModel = new CreateProductViewModel();
+            var createViewModel = new ProductViewModel();
             createViewModel.Teams = _context.Teams.ToList();
+            createViewModel.Members = _context.Members.ToList();
             return View(createViewModel);
         }
 
@@ -55,7 +66,7 @@ namespace Fanap.Plus.Product_Management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateProductViewModel viewModel)
+        public async Task<IActionResult> Create(ProductViewModel viewModel)
         {
             var product = new Products()
             {

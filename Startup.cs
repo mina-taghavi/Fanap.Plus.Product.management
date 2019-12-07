@@ -34,7 +34,7 @@ namespace Fanap.Plus.Product_Management
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddTransient(typeof(ITeamDao), typeof(TeamDao));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<DataContext>(options =>
