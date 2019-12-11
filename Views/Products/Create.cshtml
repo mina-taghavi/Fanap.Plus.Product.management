@@ -1,5 +1,6 @@
 ﻿@using System.Security.Cryptography.X509Certificates
 @using Microsoft.AspNetCore.Authentication.OpenIdConnect
+@using Microsoft.AspNetCore.Mvc.Internal
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
 
@@ -23,10 +24,19 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div>
+               
                 <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
+                <input asp-for="CreationDate" class="form-control" id="CreationDate"/>
+                <span asp-validation-for="CreationDate" class="text-danger"
+                      id="CreationDateSpan"></span>
+                
+                
+                @*<script type="text/javascript">
+                    $(function() {
+                        $("#CreationDate, #CreationDateSpan").persianDatepicker();       
+                    });
+                </script>*@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -46,17 +56,18 @@
 
             <div class="form-group">
                 <label asp-for="Teams" class="control-label"></label>
-
+            
                 @Html.ListBoxFor(Model => Model.TeamIds, new MultiSelectList(Model.Teams, "Id", "Name"),
-                    new { id = "MultipleDropDown", multiple = "multiple" })
+                    new { id = "MultipleDropDown", multiple = "multiple"  })
                 @section Scripts{
                     <script>
                         $(function () {
                             $("#MultipleDropDown").chosen({
-                                //disable_search_threshold: 9
-                                                    width: "100%"
+                                width: "100%"
                             });
-                           
+                            $("#Multiple-Member").chosen({
+                                width:"100%"
+                        });
                         });
                     </script>
                 }
@@ -65,20 +76,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Members" class="control-label"></label>
-
+             
                 @Html.ListBoxFor(Model => Model.MemberIds, new MultiSelectList(Model.Members, "Id", "FirstName"),
 
-                    new { id = "NormalDropDown"})
-                @section Scripts{
-                    <script>
-                        $(function () {
-                            $("#NormalDropDown").chosen({
-                                disable_search_threshold: 9
-                                                        });
-                           
-                        });
-                    </script>
-                }
+                    new { id = "Multiple-Member",multiple="multiple"})
+                
             </div>
             
             <div class="form-group">

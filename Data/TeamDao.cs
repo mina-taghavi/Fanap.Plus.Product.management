@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using Fanap.Plus.Product_Management.Models;
 
-namespace Fanap.Plus.Product_Management.Models
+namespace Fanap.Plus.Product_Management.Data
 {
     public class TeamDao : ITeamDao
     {
@@ -13,14 +13,7 @@ namespace Fanap.Plus.Product_Management.Models
         }
         public List<Teams> Find(int productId)
         {
-            //var query =
-            //    from team in DataContext.Teams
-            //    join ta in DataContext.TeamAssignments on team.Id equals ta.Team.Id
-            //    where ta.Product.Id == productId
-            //    select new {Team = team};
-            //return query.ToList().Select(t=> t.Team).ToList();
-            //var result = DataContext.TeamAssignment.Where(ta=>ta.ProductId == productId).ToList();
-            //return null;
+            
             var result = DataContext.Teams
                 .Join(
                     DataContext.TeamAssignment.Where(ta=> ta.ProductId == productId),

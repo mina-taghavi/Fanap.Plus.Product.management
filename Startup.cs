@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanap.Plus.Product_Management.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,7 @@ namespace Fanap.Plus.Product_Management
             });
 
             services.AddTransient(typeof(ITeamDao), typeof(TeamDao));
+            services.AddTransient(typeof(IMemberDao), typeof(MemberDao));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<DataContext>(options =>

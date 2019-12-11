@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanap.Plus.Product_Management.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace Fanap.Plus.Product_Management.Controllers
     {
         private readonly DataContext _context;
         private ITeamDao TeamDao { get; set; }
-        public ProductsController(DataContext context, ITeamDao teamDao)
+        private IMemberDao MemberDao { get; set; }
+        public ProductsController(DataContext context, ITeamDao teamDao, IMemberDao memberDao)
         {
             _context = context;
             TeamDao = teamDao;
+            MemberDao = memberDao;
         }
 
         // GET: Products
@@ -48,7 +51,7 @@ namespace Fanap.Plus.Product_Management.Controllers
             detailViewModel.Name=products.Name;
             detailViewModel.ProductOwnerName=products.ProductOwnerName;
             detailViewModel.ProjectManagementName=products.ProjectManagementName;
-            
+            detailViewModel.Members = MemberDao.Find(id.Value);
             return View(detailViewModel);
         }
 
@@ -102,36 +105,76 @@ namespace Fanap.Plus.Product_Management.Controllers
                 return NotFound();
             }
 
-            var products = await _context.Products.FindAsync(id);
-            if (products == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            return View(products);
-        }
+
+            var pevm = new ProductEditViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                CreationDate = product.CreationDate,
+                ProductOwnerName = product.ProductOwnerName,
+                ProjectManagementName = product.ProjectManagementName,
+                Description = product.Description,
+                Teams =_context.Teams.ToList(),
+                TeamIds = TeamDao.Find(id.Value).Select(t=> t.Id).ToArray(),
+                Members = _context.Members.ToList(),
+                MemberIds = MemberDao.Find(id.Value).Select(m=> m.Id).ToArray(),
+            };
+            return View(pevm);
+        } 
 
         // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreationDate,Description,ProjectManagementName,ProductOwnerName")] Products products)
+        public async Task<IActionResult> Edit(int id,ProductEditViewModel productEdit)
         {
-            if (id != products.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(products);
+
+                    var product = new Products()
+                    {
+                        Id = productEdit.Id,
+                        Name = productEdit.Name,
+                        Description = productEdit.Description,
+                        CreationDate = productEdit.CreationDate,
+                        ProductOwnerName = productEdit.ProductOwnerName,
+                        ProjectManagementName = productEdit.ProjectManagementName,
+                        TeamAssignments = new List<TeamAssignment>()
+                    };
+                    foreach (var teamId in productEdit.TeamIds)
+                    {
+                        product.TeamAssignments.Add(new TeamAssignment()
+                        {
+                            ProductId = productEdit.Id,
+                            TeamId = teamId
+                        });
+                    }
+
+                    var selectedMembers = _context.Members.Where(m => productEdit.MemberIds.Contains(m.Id) ).ToList();
+                    foreach (var member in selectedMembers)
+                    {;
+                        member.ProductId = productEdit.Id;
+                    }
+                
+
+                _context.Update(product);
+                foreach (var member in productEdit.Members)
+                {
+                    _context.Update(member);
+                }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductsExists(products.Id))
+                    if (!ProductsExists(productEdit.Id))
                     {
                         return NotFound();
                     }
@@ -140,9 +183,10 @@ namespace Fanap.Plus.Product_Management.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(products);
+            return View(productEdit);
         }
 
         // GET: Products/Delete/5

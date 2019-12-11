@@ -4,14 +4,16 @@ using Fanap.Plus.Product_Management.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fanap.Plus.Product_Management.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191208121741_added-product-foreign-key-to-members")]
+    partial class addedproductforeignkeytomembers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,7 @@ namespace Fanap.Plus.Product_Management.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<int?>("ProductId");
+                    b.Property<int>("ProductId");
 
                     b.Property<string>("Role");
 
@@ -91,7 +93,8 @@ namespace Fanap.Plus.Product_Management.Migrations
                 {
                     b.HasOne("Fanap.Plus.Product_Management.Models.Products", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Fanap.Plus.Product_Management.Models.TeamAssignment", b =>

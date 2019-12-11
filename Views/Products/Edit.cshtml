@@ -1,4 +1,4 @@
-﻿@model Fanap.Plus.Product_Management.Models.Products
+﻿@model Fanap.Plus.Product_Management.Models.ProductEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -37,6 +37,35 @@
                 <label asp-for="ProductOwnerName" class="control-label"></label>
                 <input asp-for="ProductOwnerName" class="form-control" />
                 <span asp-validation-for="ProductOwnerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teams" class="control-label"></label>
+            
+                @Html.ListBoxFor(Model => Model.TeamIds, new MultiSelectList(Model.Teams, "Id", "Name"),
+                    new { id = "MultipleDropDown", multiple = "multiple"  })
+                @section Scripts{
+                    <script>
+                        $(function () {
+                            $("#MultipleDropDown").chosen({
+                                width: "100%"
+                            });
+                            $("#Multiple-Member").chosen({
+                                width:"100%"
+                            });
+                        });
+                    </script>
+                }
+
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Members" class="control-label"></label>
+             
+                @Html.ListBoxFor(Model => Model.MemberIds, new MultiSelectList(Model.Members, "Id", "FirstName"),
+
+
+                    new { id = "Multiple-Member",multiple="multiple"})
+                
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

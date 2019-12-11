@@ -41,7 +41,7 @@
             @Html.DisplayFor(model => model.ProductOwnerName)
         </dd>
         <dt class="col-sm-2">
-            
+
             @Html.DisplayNameFor(model => model.Teams)
 
         </dt>
@@ -51,7 +51,21 @@
                 <div>@item.Name</div>
             }
         </dd>
-        <
+
+        <dt class="col-sm-2">
+
+            @Html.DisplayNameFor(model => model.Members)
+
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.Members)
+            {
+                <div>@item.FirstName</div>
+                
+                <div>@item.LastName</div>
+            }
+        </dd>
+
     </dl>
 </div>
 <div>
