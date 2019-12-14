@@ -11,7 +11,9 @@ namespace Fanap.Plus.Product_Management.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [DataType(DataType.Date)] public DateTime CreationDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] 
+        public DateTime CreationDate { get; set; }
 
         public string Description { get; set; }
 
@@ -21,7 +23,7 @@ namespace Fanap.Plus.Product_Management.Models
         public string ProductOwnerName { get; set; }
         public ICollection<TeamAssignment> TeamAssignments { get; set; }
         
-
+        
 
         //[NotMapped] public IEnumerable<Teams> Teams { get; set; }
 

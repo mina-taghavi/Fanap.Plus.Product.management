@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanap.Plus.Product_Management.Helpers;
 
 namespace Fanap.Plus.Product_Management.Models
 {
@@ -11,7 +13,13 @@ namespace Fanap.Plus.Product_Management.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [DataType(DataType.Date)]public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime GregorianCreationDate
+        {
+            get { return DateHelper.ConvertToGregorian(CreationDate); }
+        }
 
         public string Description { get; set; }
 

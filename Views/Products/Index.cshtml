@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Fanap.Plus.Product_Management.Models.Products>
+﻿@using Fanap.Plus.Product_Management.Helpers
+@using Microsoft.CodeAnalysis.Differencing
+@model IEnumerable<Fanap.Plus.Product_Management.Models.Products>
 
 @{
     ViewData["Title"] = "Index";
@@ -31,20 +33,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
+    var persianDate = DateHelper.ConvertToPersian(item.CreationDate);
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
+                @Html.DisplayFor(modelItem => persianDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProjectManagementName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductOwnerName)
             </td>

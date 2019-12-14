@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanap.Plus.Product_Management.Data;
+using Fanap.Plus.Product_Management.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +47,7 @@ namespace Fanap.Plus.Product_Management.Controllers
             ProductViewModel detailViewModel;
             detailViewModel = new ProductViewModel();
             detailViewModel.Teams = TeamDao.Find(id.Value);
-            detailViewModel.CreationDate =products.CreationDate;
+            detailViewModel.CreationDate =DateHelper.ConvertToPersian(products.CreationDate);
             detailViewModel.Description=products.Description;
             detailViewModel.Id=products.Id;
             detailViewModel.Name=products.Name;
@@ -62,6 +64,7 @@ namespace Fanap.Plus.Product_Management.Controllers
             createViewModel.Teams = _context.Teams.ToList();
             createViewModel.Members = _context.Members.ToList();
             return View(createViewModel);
+            
         }
 
         // POST: Products/Create
@@ -74,7 +77,7 @@ namespace Fanap.Plus.Product_Management.Controllers
             var product = new Products()
             {
                 Name = viewModel.Name,
-                CreationDate = viewModel.CreationDate,
+                CreationDate = viewModel.GregorianCreationDate,
                 Description = viewModel.Description,
                 ProductOwnerName = viewModel.ProductOwnerName,
                 ProjectManagementName = viewModel.ProjectManagementName,
@@ -115,8 +118,8 @@ namespace Fanap.Plus.Product_Management.Controllers
             {
                 Id = product.Id,
                 Name = product.Name,
-                CreationDate = product.CreationDate,
-                ProductOwnerName = product.ProductOwnerName,
+                CreationDate = DateHelper.ConvertToPersian(product.CreationDate),
+               ProductOwnerName = product.ProductOwnerName,
                 ProjectManagementName = product.ProjectManagementName,
                 Description = product.Description,
                 Teams =_context.Teams.ToList(),
@@ -144,7 +147,7 @@ namespace Fanap.Plus.Product_Management.Controllers
                         Id = productEdit.Id,
                         Name = productEdit.Name,
                         Description = productEdit.Description,
-                        CreationDate = productEdit.CreationDate,
+                        CreationDate = productEdit.GregorianCreationDate,
                         ProductOwnerName = productEdit.ProductOwnerName,
                         ProjectManagementName = productEdit.ProjectManagementName,
                         TeamAssignments = new List<TeamAssignment>()
