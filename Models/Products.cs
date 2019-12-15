@@ -10,26 +10,18 @@ namespace Fanap.Plus.Product_Management.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] 
         public DateTime CreationDate { get; set; }
+        public DateTime DeadlineDate { get; set; }
 
         public string Description { get; set; }
 
         //[Display(Name = "نام مدیر پروژه")] 
-        public string ProjectManagementName { get; set; }
+        public string ProductManagementName { get; set; }
 
         public string ProductOwnerName { get; set; }
         public ICollection<TeamAssignment> TeamAssignments { get; set; }
-        
-        
-
-        //[NotMapped] public IEnumerable<Teams> Teams { get; set; }
-
-        //[Display(Name = "SelectedTeam")] public string Team { get; set; }
-
-        //// public string[] DevelopmentTeam { get; set; }
-        ////public string[] OtherMembers { get; set; }
     }
 }

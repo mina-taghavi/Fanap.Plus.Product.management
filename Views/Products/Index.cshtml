@@ -11,6 +11,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Products" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -21,10 +27,13 @@
                 @Html.DisplayNameFor(model => model.CreationDate)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DeadlineDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectManagementName)
+                @Html.DisplayNameFor(model => model.ProductManagementName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProductOwnerName)
@@ -35,19 +44,23 @@
     <tbody>
 @foreach (var item in Model)
 {
-    var persianDate = DateHelper.ConvertToPersian(item.CreationDate);
+    var creationPersianDate = DateHelper.ConvertToPersian(item.CreationDate);
+    var deadlinePersianDate = DateHelper.ConvertToPersian(item.DeadlineDate);
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => persianDate)
+                @Html.DisplayFor(modelItem => creationPersianDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => deadlinePersianDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectManagementName)
+                @Html.DisplayFor(modelItem => item.ProductManagementName)
             <td>
                 @Html.DisplayFor(modelItem => item.ProductOwnerName)
             </td>

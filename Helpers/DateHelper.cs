@@ -10,9 +10,14 @@ namespace Fanap.Plus.Product_Management.Helpers
             var persianCalendar = new PersianCalendar();
             return $"{persianCalendar.GetYear(gregorianDate)}/{persianCalendar.GetMonth(gregorianDate)}/{persianCalendar.GetDayOfMonth(gregorianDate)}";
         }
-        public static DateTime ConvertToGregorian(string persianDate)
+        public static DateTime? ConvertToGregorian(string persianDate)
         {
+            if(string.IsNullOrWhiteSpace(persianDate))
+            {
+                return null;
+            }
             PersianCalendar persianCalendar = new PersianCalendar();
+            
             string[] parts = persianDate.Split('/');
             return persianCalendar.ToDateTime(Convert.ToInt32(parts[0]), Convert.ToInt32(parts[1]), Convert.ToInt32(parts[2]), 0, 0, 0, 0);
         }

@@ -25,9 +25,17 @@ namespace Fanap.Plus.Product_Management.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Products.ToListAsync());
+            var products = from p in _context.Products
+                select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -47,12 +55,13 @@ namespace Fanap.Plus.Product_Management.Controllers
             ProductViewModel detailViewModel;
             detailViewModel = new ProductViewModel();
             detailViewModel.Teams = TeamDao.Find(id.Value);
+            detailViewModel.DeadlineDate =DateHelper.ConvertToPersian(products.DeadlineDate);
             detailViewModel.CreationDate =DateHelper.ConvertToPersian(products.CreationDate);
             detailViewModel.Description=products.Description;
             detailViewModel.Id=products.Id;
             detailViewModel.Name=products.Name;
             detailViewModel.ProductOwnerName=products.ProductOwnerName;
-            detailViewModel.ProjectManagementName=products.ProjectManagementName;
+            detailViewModel.ProductManagementName=products.ProductManagementName;
             detailViewModel.Members = MemberDao.Find(id.Value);
             return View(detailViewModel);
         }
@@ -77,10 +86,11 @@ namespace Fanap.Plus.Product_Management.Controllers
             var product = new Products()
             {
                 Name = viewModel.Name,
-                CreationDate = viewModel.GregorianCreationDate,
+                DeadlineDate = viewModel.GregorianDeadlineDate,
+                CreationDate = DateTime.Now,
                 Description = viewModel.Description,
                 ProductOwnerName = viewModel.ProductOwnerName,
-                ProjectManagementName = viewModel.ProjectManagementName,
+                ProductManagementName = viewModel.ProductManagementName,
             };
             product.TeamAssignments = new List<TeamAssignment>();
             foreach (var team in viewModel.TeamIds)
@@ -118,9 +128,9 @@ namespace Fanap.Plus.Product_Management.Controllers
             {
                 Id = product.Id,
                 Name = product.Name,
-                CreationDate = DateHelper.ConvertToPersian(product.CreationDate),
-               ProductOwnerName = product.ProductOwnerName,
-                ProjectManagementName = product.ProjectManagementName,
+                DeadlineDate = DateHelper.ConvertToPersian(product.DeadlineDate),
+                ProductOwnerName = product.ProductOwnerName,
+                ProductManagementName = product.ProductManagementName,
                 Description = product.Description,
                 Teams =_context.Teams.ToList(),
                 TeamIds = TeamDao.Find(id.Value).Select(t=> t.Id).ToArray(),
@@ -147,9 +157,9 @@ namespace Fanap.Plus.Product_Management.Controllers
                         Id = productEdit.Id,
                         Name = productEdit.Name,
                         Description = productEdit.Description,
-                        CreationDate = productEdit.GregorianCreationDate,
+                        DeadlineDate = productEdit.GregorianDeadlineDate,
                         ProductOwnerName = productEdit.ProductOwnerName,
-                        ProjectManagementName = productEdit.ProjectManagementName,
+                        ProductManagementName = productEdit.ProductManagementName,
                         TeamAssignments = new List<TeamAssignment>()
                     };
                     foreach (var teamId in productEdit.TeamIds)

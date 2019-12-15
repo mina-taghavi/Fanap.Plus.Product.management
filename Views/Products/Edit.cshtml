@@ -18,10 +18,11 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" id="creationDateInput"/>
-                <span  class="text-danger" id="creationDateSpan"></span>
+                <label asp-for="DeadlineDate" class="control-label"></label>
+                <input asp-for="DeadlineDate" class="form-control" id="DeadlineDateInput" />
+                <span class="text-danger" id="DeadlineDateSpan"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -29,9 +30,9 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectManagementName" class="control-label"></label>
-                <input asp-for="ProjectManagementName" class="form-control" />
-                <span asp-validation-for="ProjectManagementName" class="text-danger"></span>
+                <label asp-for="ProductManagementName" class="control-label"></label>
+                <input asp-for="ProductManagementName" class="form-control" />
+                <span asp-validation-for="ProductManagementName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProductOwnerName" class="control-label"></label>
@@ -40,34 +41,34 @@
             </div>
             <div class="form-group">
                 <label asp-for="Teams" class="control-label"></label>
-            
+
                 @Html.ListBoxFor(Model => Model.TeamIds, new MultiSelectList(Model.Teams, "Id", "Name"),
-                    new { id = "MultipleDropDown", multiple = "multiple"  })
+                    new { id = "MultipleDropDown", multiple = "multiple" })
                 @section Scripts{
                     <script>
-    $(function () {
-        $("#MultipleDropDown").chosen({
-            width: "100%"
-        });
-        $("#Multiple-Member").chosen({
-            width:"100%"
-        });
-        $("#creationDateInput, #creationDateSpan").persianDatepicker();
-    });
-        </script>
-                    
+                        $(function () {
+                            $("#MultipleDropDown").chosen({
+                                width: "100%"
+                            });
+                            $("#Multiple-Member").chosen({
+                                width: "100%"
+                            })
+                            $("#DeadlineDateInput, #DeadlineDateSpan").persianDatepicker();
+                        });
+                    </script>
+
                 }
 
 
             </div>
             <div class="form-group">
                 <label asp-for="Members" class="control-label"></label>
-             
+
                 @Html.ListBoxFor(Model => Model.MemberIds, new MultiSelectList(Model.Members, "Id", "FirstName"),
 
 
-                    new { id = "Multiple-Member",multiple="multiple"})
-                
+                    new { id = "Multiple-Member", multiple = "multiple" })
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

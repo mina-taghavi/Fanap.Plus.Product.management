@@ -12,19 +12,14 @@ namespace Fanap.Plus.Product_Management.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Required]
+        public string DeadlineDate { get; set; }
 
-        public string CreationDate { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime GregorianCreationDate
-        {
-            get { return DateHelper.ConvertToGregorian(CreationDate); }
-        }
-
+        public DateTime GregorianDeadlineDate => DateHelper.ConvertToGregorian(DeadlineDate).GetValueOrDefault();
         public string Description { get; set; }
 
         // [Display(Name = "نام مدیر پروژه")]
-        public string ProjectManagementName { get; set; }
+        public string ProductManagementName { get; set; }
 
         public string ProductOwnerName { get; set; }
         public ICollection<Teams> Teams { get; set; } = new List<Teams>();
