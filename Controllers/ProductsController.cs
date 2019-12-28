@@ -25,7 +25,7 @@ namespace Fanap.Plus.Product_Management.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(string searchString)
+        /*public async Task<IActionResult> Index(string searchString)
         {
             var products = from p in _context.Products
                 select p;
@@ -36,8 +36,35 @@ namespace Fanap.Plus.Product_Management.Controllers
             }
 
             return View(await products.ToListAsync());
-        }
+        }*/
+        public async Task<IActionResult> Index(string productTeam, string searchString)
+        {
+            // Use LINQ to get list of genres.
+            IQueryable<string> teamQuery = from t in _context.Teams
+                orderby t.Name
+                select t.Name;
 
+            var products = from p in _context.Products
+                select p;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.Name.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(productTeam))
+            {
+                products = products.Where(x => x.TeamAssignments.Any(t=>t.Team.Name == productTeam));
+            }
+            var productTeamVM = new IndexProductViewModel()
+            {
+                Teams = new SelectList(await teamQuery.Distinct().ToListAsync()),
+                Products = await products.ToListAsync()
+            };
+
+
+            return View(productTeamVM);
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -14,5 +15,7 @@ namespace Fanap.Plus.Product_Management.Models
         public string Role { set; get; }
         public Products Product { get; set; }
         public int? ProductId { get; set; }
+        public Teams Team { set; get; }
+        public int? TeamId { get; set; }
     }
 }

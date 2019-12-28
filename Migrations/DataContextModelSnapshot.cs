@@ -33,9 +33,13 @@ namespace Fanap.Plus.Product_Management.Migrations
 
                     b.Property<string>("Role");
 
+                    b.Property<int?>("TeamId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Members");
                 });
@@ -94,6 +98,10 @@ namespace Fanap.Plus.Product_Management.Migrations
                     b.HasOne("Fanap.Plus.Product_Management.Models.Products", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
+
+                    b.HasOne("Fanap.Plus.Product_Management.Models.Teams", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId");
                 });
 
             modelBuilder.Entity("Fanap.Plus.Product_Management.Models.TeamAssignment", b =>
